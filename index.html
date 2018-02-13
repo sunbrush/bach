@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="REFINER, an educationl tool for vizualizing transformation of regular expressions into finite automata. This file allows the compiler to be run from a web browser." name="description">
+    <meta content="Dana - Ioana Zaharia" name="author">
+    <title>Refiner</title>
+    <link rel="stylesheet" href="refiner.css" type="text/css" /> 
+
+    <script type="text/javascript" src="lib/d3.js"></script>
+    
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="parser.js"></script>
+    <script type="text/javascript" src="rytter.js"></script>
+	<script type="text/javascript" src="refiner.js"></script>
+	
+    
+     
+    <script type="text/javascript">
+    window.addEventListener("load", REFINER.focusRex, false);
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Rytter</h1> 
+        <div id="input">
+            <input id="rex" type="text" placeholder="e.g. : a*|b(b(a|c)*|b)*" />
+            <button id="startbtn" class="btn">start</button> 
+        </div>
+    </header>
+    <div id="cmd">
+            <button id="prevbtn"  class="btn nav" disabled="true">prev</button>
+            <button id="nextbtn" class="btn nav">next</button>
+   </div>
+    
+    <div id="displayArea" >
+        <div id="tree"></div>
+        <div id="nfa"></div>
+    </div>
+
+<script type="text/javascript">
+    rex.addEventListener("change", REFINER.startListener, false); 
+</script>
+<script type="text/javascript">
+    startbtn.addEventListener("click", REFINER.startListener, false);
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+Expression = Union
+ 
+Union 
+  = head:Concatenation tail:(_ ("+"/"|") _ Concatenation)+ {
+    return tail.reduce(function (previous, current) {
+        return {
+            info: current[1],
+            left : previous,
+            right: current[3]
+            };
+    }, head);      
+  } 
+  / Concatenation
+
+Concatenation
+  = head:Closure tail:(_ ("."/ _) _ Closure)+ {
+    return tail.reduce(function (previous, current) {
+        return {
+            info: ".",
+            left : previous,
+            right: current[3]
+            };
+    }, head);  
+  } 
+  /  Closure
+
+Closure
+  = head:Parenth op:(("*")_) {
+      return {
+          info: "*",
+          left: head
+      };
+  } 
+  / Parenth
+
+Parenth
+  = "(" _ expr:Expression _ ")" { 
+  return expr;
+  }  
+  / Operand
+
+Operand
+  = [a-z]/[A-Z] { 
+      return {
+          info:text()
+          };
+  }
+
+_ "whitespace"
+  = [ \t\n\r]*
